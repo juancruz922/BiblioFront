@@ -16,9 +16,9 @@ const App = () => {
         </View>
         <TouchableOpacity style={[styles.button, styles.loginButton]}>
           <Button
-           style={styles.buttonText}
+            
             title="Iniciar sesión"
-            onPress={() => navigation.navigate(Segunda)}
+            //onPress={() => navigation.navigate(Segunda)}
                ></Button>
         </TouchableOpacity>
         </View>

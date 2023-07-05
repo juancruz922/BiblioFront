@@ -15,16 +15,15 @@ const SecondScreen = () => {
               <Image source={require('../../assets/rayas.png')} style={styles.rayas} />
             </TouchableOpacity>
           </View>
-          <Text style={styles.blueRectangleTitle}>RETIRO</Text>
+          <Text style={styles.blueRectangleTitle}>MIS PRESTAMOS</Text>
         </View>
         <View style={styles.grayRectangle}>
           <View style={styles.inputContainer}>
-            <TextInput style={styles.input} placeholder="Seleccione un libro" />
-            <TextInput style={styles.input} placeholder="Agregue una nota sobre su libro" />
+          <Text style={styles.text1}>Operacion Masacre</Text>
+          <Text style={styles.text1}>Operacion Masacre</Text>
+          <Text style={styles.text1}>Operacion Masacre</Text>
           </View>
-          <TouchableOpacity style={styles.button}>
-            <Text style={styles.buttonText}>Generar QR</Text>
-          </TouchableOpacity>
+          
         </View>
       </View>
       <View style={styles.footer}>
@@ -42,7 +41,6 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'flex-start',
     alignItems: 'center',
-
     width: '100%',
   },
   header: {
@@ -55,14 +53,7 @@ const styles = StyleSheet.create({
   menuIconContainer: {
     marginRight: 10,
   },
-  menuIcon: {
-    width: 20,
-    height: 20,
-  },
-  username: {
-    fontSize: 16,
-    fontWeight: 'bold',
-  },
+ 
   content: {
     flex: 1,
     justifyContent: 'flex-start',
@@ -94,33 +85,8 @@ const styles = StyleSheet.create({
   inputContainer: {
     flex: 1,
   },
-  input: {
-    width: '100%',
-    height: 50,
-    borderWidth: 1,
-    borderRadius: 10,
-    paddingHorizontal: 10,
-    marginBottom: 10,
-    marginTop: 70,
-  },
-  button: {
-    width: '100%',
-    height: 50,
-    backgroundColor: '#0D47A1',
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: 10,
-  },
-  buttonText: {
-    fontSize: 16,
-    color: '#FFFFFF',
-  },
-  footer: {
-    alignItems: 'center',
-    marginTop: 'auto',
-    marginBottom: 20,
-    width: '100%',
-  },
+  
+
   logo: {
     width: 100,
     height: 100,
@@ -134,7 +100,16 @@ const styles = StyleSheet.create({
 
 
 
+  },
+  text1:{
+    fontSize: 15,
+    marginLeft: -15,
+    marginBottom: 40,
+    
+
+
   }
+
 });
 
 export default SecondScreen;
