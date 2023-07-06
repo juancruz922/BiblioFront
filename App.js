@@ -12,10 +12,10 @@ const Stack = createNativeStackNavigator();
 
 export default function App() {
  
-  return (<Tercera/>)
+  return (<Main/>)
     
   /*<NavigationContainer>
-       <Stack.Navigator initialRouteName="Main">
+<Stack.Navigator initialRouteName="Main">
         <Stack.Screen name="Main" component={Main} />
         <Stack.Screen name="Segunda" component={Segunda} />
       </Stack.Navigator>

@@ -95,11 +95,8 @@ const styles = StyleSheet.create({
 
     width: 35,
     height: 35,
-    marginBottom: 70,
+    marginBottom: 20,
     marginRight: 80,
-
-
-
   },
   text1:{
     fontSize: 15,

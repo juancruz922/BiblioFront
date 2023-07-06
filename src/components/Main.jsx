@@ -6,7 +6,7 @@ const App = () => {
     <View style={styles.container}>
       <Text style={styles.title}>BibliotecaOrt</Text>
       <View style={styles.content}>
-       
+
         <View style={styles.rectangle}>
         <View style={styles.inputContainer}>
           <TextInput style={styles.input} placeholder="  D.N.I" />
@@ -19,7 +19,7 @@ const App = () => {
             
             title="Iniciar sesión"
             //onPress={() => navigation.navigate(Segunda)}
-               ></Button>
+></Button>
         </TouchableOpacity>
         </View>
       </View>
@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
     width: '100%',
     marginTop: '8%',
     alignItems: 'center',
-   
+
   },
   inputContainer: {
     marginBottom: 20,

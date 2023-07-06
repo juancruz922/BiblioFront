@@ -124,16 +124,14 @@ const styles = StyleSheet.create({
   logo: {
     width: 100,
     height: 100,
+
   },
   rayas:{
 
     width: 35,
     height: 35,
-    marginBottom: 70,
+    marginBottom: 20,
     marginRight: 80,
-
-
-
   }
 });
 
