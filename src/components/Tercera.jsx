@@ -7,7 +7,7 @@ const SecondScreen = () => {
   };
 
   return (
-    <View style={styles.container}>
+    <View style={styles.containerb}>
       <View style={styles.content}>
         <View style={styles.blueRectangle}>
           <View style={styles.header}>
@@ -35,9 +35,14 @@ const SecondScreen = () => {
 
 const styles = StyleSheet.create({
 
-
-  
   container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  
+  containerb: {
     flex: 1,
     justifyContent: 'flex-start',
     alignItems: 'center',

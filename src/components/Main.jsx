@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, TextInput, Image, Button } from 'react-native';
-import Segunda from './2.jsx'
+import Segunda from './Segunda.jsx'
 const App = () => {
   return (
     <View style={styles.container}>
