@@ -1,3 +1,12 @@
+import { Text,StyleSheet, View } from 'react-native';
+
+export function Tercera() {
+  return (
+    <View style={styles.container}>
+      <Text>3</Text>
+    </View>
+  );
+}
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, TextInput, Image } from 'react-native';
 

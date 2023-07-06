@@ -19,19 +19,12 @@ export default function App() {
     <NavigationContainer>
       <Menu.Navigator>
         <Menu.Screen
-          name="Main"
-          options={{
-            headerTitle: "",
-          }}
-          component={Main}
-        />
-        <Menu.Screen name="Retirar" component={Segunda} />
-        <Menu.Screen name="Mis Prestamos" component={Tercera} />
           name="Inicio"
           options={{
             headerTitle: "Nuevo titulo",
           }}
           component={Inicio}
+        />
         <Menu.Screen name="Segunda" component={Segunda} />
         <Menu.Screen name="Tercera" component={Tercera} />
       </Menu.Navigator>
