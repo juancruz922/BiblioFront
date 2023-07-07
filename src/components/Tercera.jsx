@@ -1,14 +1,12 @@
-import { Text,StyleSheet, View } from 'react-native';
+import React from 'react';
+import { View, Text, StyleSheet, TouchableOpacity, TextInput, Image } from 'react-native';
 
 export function Tercera() {
   return (
     <View style={styles.container}>
       <Text>3</Text>
     </View>
-  );
-}
-import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, TextInput, Image } from 'react-native';
+  ); }
 
 const SecondScreen = () => {
   const handleRayasPress = () => {
@@ -19,11 +17,7 @@ const SecondScreen = () => {
     <View style={styles.containerb}>
       <View style={styles.content}>
         <View style={styles.blueRectangle}>
-          <View style={styles.header}>
-            <TouchableOpacity onPress={handleRayasPress}>
-              <Image source={require('../../assets/rayas.png')} style={styles.rayas} />
-            </TouchableOpacity>
-          </View>
+  
           <Text style={styles.blueRectangleTitle}>MIS PRESTAMOS</Text>
         </View>
         <View style={styles.grayRectangle}>
@@ -104,13 +98,6 @@ const styles = StyleSheet.create({
   logo: {
     width: 100,
     height: 100,
-  },
-  rayas:{
-
-    width: 35,
-    height: 35,
-    marginBottom: 20,
-    marginRight: 80,
   },
   text1:{
     fontSize: 15,

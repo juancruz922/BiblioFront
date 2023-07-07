@@ -1,10 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, TextInput, Image, Button } from 'react-native';
 import Segunda from './Segunda.jsx'
-<<<<<<< HEAD
-=======
 
->>>>>>> e7f7167f4e51c3226ae29ef76f1c475f7bf5605e
 const App = () => {
   return (
     <View style={styles.container}>
@@ -22,7 +19,7 @@ const App = () => {
           <Button
             
             title="Iniciar sesión"
-            //onPress={() => navigation.navigate(Segunda)}
+            onPress={() => navigation.navigate(Segunda)}
 ></Button>
         </TouchableOpacity>
         </View>

@@ -11,11 +11,6 @@ const SecondScreen = () => {
     <View style={styles.containerb}>
       <View style={styles.content}>
         <View style={styles.blueRectangle}>
-          <View style={styles.header}>
-            <TouchableOpacity onPress={handleRayasPress}>
-              <Image source={require('../../assets/rayas.png')} style={styles.rayas} />
-            </TouchableOpacity>
-          </View>
           <Text style={styles.blueRectangleTitle}>RETIRO</Text>
         </View>
         <View style={styles.grayRectangle}>
@@ -134,13 +129,7 @@ const styles = StyleSheet.create({
     height: 100,
 
   },
-  rayas:{
 
-    width: 35,
-    height: 35,
-    marginBottom: 20,
-    marginRight: 80,
-  }
 });
 
 export default SecondScreen;
