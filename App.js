@@ -18,7 +18,7 @@ export default function App() {
     <NavigationContainer>
       <Menu.Navigator>
         <Menu.Screen
-          name="Inicio"
+          name=","
           
           options={{
             headerTitle: null,
@@ -35,7 +35,7 @@ export default function App() {
           component={Main}
         />
         <Menu.Screen style={{}} 
-          name ="Retiro"  
+          name ="-"  
           
           options={{
             headerTitle: null,
@@ -53,7 +53,7 @@ export default function App() {
           component={Segunda}
         />
         <Menu.Screen
-          name="Mis prestamos"
+          name="."
           options={{
             headerTitle: null,
             headerStyle: styles.NombresBarra,
@@ -62,7 +62,7 @@ export default function App() {
             ),
             drawerLabel: ({ focused, color }) => (
               <Text style={[styles.drawerLabel, focused && { fontWeight: 'bold' }]}>
-               Mis prestamos
+                Mis prestamos
               </Text>
             ),
           }}

@@ -1,6 +1,8 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, TextInput, Image } from 'react-native';
-
+import { MaterialIcons } from '@expo/vector-icons';
+import { AntDesign } from '@expo/vector-icons';
+import { Entypo } from '@expo/vector-icons';
 export function Tercera() {
   return (
     <View style={styles.container}>
@@ -19,14 +21,28 @@ const SecondScreen = () => {
         <View style={styles.blueRectangle}>
   
           <Text style={styles.blueRectangleTitle}>MIS PRESTAMOS</Text>
-        </View>
+        </View> 
         <View style={styles.grayRectangle}>
-          <View style={styles.inputContainer}>
+<View style={{marginLeft: 10}}>
+
+          <View style={{flexDirection: 'row'}}>
           <Text style={styles.text1}>Operacion Masacre</Text>
-          <Text style={styles.text1}>Operacion Masacre</Text>
-          <Text style={styles.text1}>Operacion Masacre</Text>
+          <AntDesign name="checkcircle" size={19} color="green" style={{marginLeft: 14}}/>
           </View>
+
+          <View style={{flexDirection: 'row'}}>
+          <Text style={styles.text1}>Operacion Masacre</Text>
+          <MaterialIcons name="error" size={24} color="yellow" style={{marginLeft: 10}} /> 
+          </View>
+
+          <View style={{flexDirection: 'row'}}>
+          <Text style={styles.text1}>Operacion Masacre</Text>
+          <Entypo name="circle-with-cross" size={24} color="red" style={{marginLeft: 10}} />
+          </View>
+
+        
           
+          </View>
         </View>
       </View>
       <View style={styles.footer}>
@@ -82,11 +98,11 @@ const styles = StyleSheet.create({
     fontFamily: 'serif',
   },
   grayRectangle: {
-    width: '80%',
+    width: '92%',
     height: '70%',
     backgroundColor: '#E0E0E0',
     borderRadius: 10,
-    marginTop: 20,
+    marginTop: 40,
     padding: 20,
     justifyContent: 'space-between',
   },
@@ -100,13 +116,15 @@ const styles = StyleSheet.create({
     height: 100,
   },
   text1:{
+  
     fontSize: 15,
-    marginLeft: -15,
-    marginBottom: 40,
-    
+    marginLeft: -17,
+    marginBottom: 60,
+  
 
 
-  }
+  },
+
 
 });
 

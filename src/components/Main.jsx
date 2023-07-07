@@ -18,7 +18,7 @@ const App = () => {
         <TouchableOpacity style={[styles.button, styles.loginButton]}>
           <Button
             
-            title="Iniciar sesión"
+            title="Iniciar sesión" color='0D47A1'
             onPress={() => navigation.navigate(Segunda)}
 ></Button>
         </TouchableOpacity>
