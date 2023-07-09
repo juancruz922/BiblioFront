@@ -1,8 +1,16 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, TextInput, Image, Button } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import Segunda from './Segunda.jsx'
 
-const App = () => {
+
+const App = ({navigation}) => {
+  
+  const irASegundaPantalla = () => {
+    navigation.navigate('Segunda');
+  };
+
+  
   return (
     <View style={styles.container}>
       <Text style={styles.title}>BibliotecaOrt</Text>
@@ -15,11 +23,11 @@ const App = () => {
         <View style={styles.inputContainer}>
           <TextInput style={styles.input} placeholder="  Contraseña" secureTextEntry={true} />
         </View>
-        <TouchableOpacity style={[styles.button, styles.loginButton]}>
+        <TouchableOpacity style={[styles.button]}>
           <Button
             
             title="Iniciar sesión" color='0D47A1'
-            onPress={() => navigation.navigate(Segunda)}
+            onPress= {irASegundaPantalla}
 ></Button>
         </TouchableOpacity>
         </View>
@@ -29,6 +37,11 @@ const App = () => {
       </View>
     </View>
   );
+
+
+
+
+
 };
 
 const styles = StyleSheet.create({

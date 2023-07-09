@@ -1,6 +1,8 @@
 
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, TextInput, Image } from 'react-native';
+import Main from './Main.jsx';
+
 
 const SecondScreen = () => {
   const handleRayasPress = () => {
