@@ -84,7 +84,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#E0E0E0',
     width: '80%',
     borderRadius: 20,
-    height: '13%',
+    height: '130%',
     marginTop: 0,
     display: "flex",
     justifyContent: 'center',
