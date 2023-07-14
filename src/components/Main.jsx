@@ -5,15 +5,14 @@ import Segunda from './Segunda.jsx'
 
 
 const App = ({navigation}) => {
-  
   const irASegundaPantalla = () => {
-    navigation.navigate('Segunda');
-  };
+  navigation.navigate('Segunda');
+};
 
   
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>BibliotecaOrt</Text>
+      <Text style={styles.title}>Biblioteca Ort</Text>
       <View style={styles.content}>
 
         <View style={styles.rectangle}>
@@ -24,11 +23,10 @@ const App = ({navigation}) => {
           <TextInput style={styles.input} placeholder="  Contraseña" secureTextEntry={true} />
         </View>
         <TouchableOpacity style={[styles.button]}>
-          <Button
-            
-            title="Iniciar sesión" color='0D47A1'
+          <Button 
+            title="Iniciar sesión" 
             onPress= {irASegundaPantalla}
-></Button>
+          ></Button>
         </TouchableOpacity>
         </View>
       </View>
@@ -37,10 +35,6 @@ const App = ({navigation}) => {
       </View>
     </View>
   );
-
-
-
-
 
 };
 
@@ -52,11 +46,12 @@ const styles = StyleSheet.create({
     paddingTop: 50,
   },
   title: {
-    fontSize: 50,
+    fontSize: 40,
     fontWeight: 'bold',
     color: '#0D47A1',
     marginBottom: 40,
     fontFamily: 'serif',
+    marginTop:20,
   },
   content: {
     flex: 1,
@@ -77,28 +72,19 @@ const styles = StyleSheet.create({
     marginLeft: 27
   },
   button: {
-    width: '80%',
-    height: 50,
-    backgroundColor: '#0D47A1',
-    justifyContent: 'center',
+
+    height:100,
     alignItems: 'center',
-    marginTop: 85,
-    marginBottom: 10,
-    borderRadius: 20,
-    marginLeft: 25,
+    justifyContent: 'center',
+    
   },
-  buttonText: {
-    fontSize: 25,
-    color: '#FFFFFF',
-  },
-  loginButton: {
-    backgroundColor: '#0D47A1',
-  },
+  
+
   rectangle: {
     backgroundColor: '#E0E0E0',
     width: '80%',
     borderRadius: 20,
-    height: '150%',
+    height: '13%',
     marginTop: 0,
     display: "flex",
     justifyContent: 'center',

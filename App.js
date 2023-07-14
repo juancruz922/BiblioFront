@@ -16,9 +16,29 @@ const Stack = createStackNavigator();
 const Menu = createDrawerNavigator();
 
 export default function App() {
-  return ( 
+  return (
     <NavigationContainer>
       <Menu.Navigator>
+
+      <Menu.Screen
+          name="App"
+
+          options={({navigation})=>( {
+            headerShown:false,
+            drawerIcon: ({ color, size }) => (
+<SimpleLineIcons name="logout" size={24} color="black"/>
+            ),
+            drawerLabel: ({ focused, color }) => (
+              <View style={styles.logout}>
+              <Text  style={[styles.drawerLabel, focused && { fontWeight: 'bold' }]}> 
+                Log Out
+              </Text>
+</ View>
+          ),            
+          headerShown: false 
+          })}
+          component={Main}
+        />
         
         <Menu.Screen
           name ="Segunda"  
@@ -35,6 +55,7 @@ export default function App() {
             ),
           }}
           component={Segunda}
+
         />
         <Menu.Screen
           name="."
@@ -52,25 +73,7 @@ export default function App() {
           }}
           component={Tercera}
         />
-
-<Menu.Screen
-          name="App"
-         
-          options={({navigation})=>( {
-            headerShown:false,
-            drawerIcon: ({ color, size }) => (
-           <SimpleLineIcons name="logout" size={24} color="black"/>
-            ),
-            drawerLabel: ({ focused, color }) => (
-              <View style={styles.logout}>
-              <Text  style={[styles.drawerLabel, focused && { fontWeight: 'bold' }]}> 
-                Log Out
-              </Text>
-             </ View>
-          ),
-          })}
-          component={Main}
-        />
+        
       </Menu.Navigator>
     </NavigationContainer>
   );
