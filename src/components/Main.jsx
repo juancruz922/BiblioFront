@@ -24,8 +24,10 @@ const App = ({navigation}) => {
         </View>
         <TouchableOpacity style={[styles.button]}>
           <Button 
+          
             title="Iniciar sesión" 
             onPress= {irASegundaPantalla}
+            style={styles.login}
           ></Button>
         </TouchableOpacity>
         </View>
@@ -44,6 +46,11 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     alignItems: 'center',
     paddingTop: 50,
+  },
+
+  login:{
+    color: '#0D47A1',
+    
   },
   title: {
     fontSize: 40,

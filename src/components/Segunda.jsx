@@ -92,7 +92,7 @@ const SecondScreen = () => {
 >
   <View style={styles.modalContainer}>
     <View style={styles.modalCustom}>
-    <Image source={require('/img/qrprueba.jpg')} style={styles.modalImage} />
+    <Image source={require('/assets/qrprueba.jpg')} style={styles.modalImage} />
     {/* Puedes agregar más contenido aquí */}
     <TouchableOpacity style={styles.closeButton} onPress={closeModal}>
       <Text style={styles.closeButtonText}>Cerrar</Text>

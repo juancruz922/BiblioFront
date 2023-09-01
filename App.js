@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, TouchableWithoutFeedback } from 'react-native';
 import Main from './src/components/Main';
 import Segunda from './src/components/Segunda';
 import Tercera from './src/components/Tercera';
+import biblio1 from './src/components/biblio1';
 import Qr from './src/components/Qr';
 import { Entypo } from '@expo/vector-icons';
 import { createDrawerNavigator } from "@react-navigation/drawer";
@@ -59,6 +60,7 @@ export default function App() {
           component={Segunda}
 
         />
+        
         <Menu.Screen
           name="."
           options={{
@@ -75,7 +77,8 @@ export default function App() {
           }}
           component={Tercera}
         />
-<Menu.Screen
+        
+        <Menu.Screen
           name ="QR"  
           options={{
             headerTitle: null,
@@ -92,9 +95,44 @@ export default function App() {
           component={Qr}
 
         />
+        <Menu.Screen
+          name ="bibliooo"  
+          options={{
+            headerTitle: null,
+            
+            drawerIcon: ({ color, size }) => (
+              <Ionicons name="ios-qr-code" size={24} color="black" />
+            ),
+            drawerLabel: ({ focused, color }) => (
+              <Text style={[styles.drawerLabel, focused && { fontWeight: 'bold' }]}>
+                Bibliotecario
+              </Text>
+            ),
+          }}
+          component={biblio1}
+
+        />
       </Menu.Navigator>
     </NavigationContainer>
   );
+
+  <Menu.Screen
+          name="Bilio"
+
+          options={({navigation})=>( {
+            headerShown:false,
+            
+            drawerLabel: ({ focused, color }) => (
+              <View style={styles.logout}>
+              <Text  style={[styles.drawerLabel, focused && { fontWeight: 'bold' }]}> 
+                Bibliotecario
+              </Text>
+</ View>
+          ),            
+          headerShown: false 
+          })}
+          component={biblio1}
+        />
   
 }
 
