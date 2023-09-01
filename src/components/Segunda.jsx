@@ -1,14 +1,46 @@
-
-import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, TextInput, Image } from 'react-native';
-import Main from './Main.jsx';
-
+import React, { useState, useEffect } from 'react';
+import { View, Text, StyleSheet, TouchableOpacity, TextInput, Image, FlatList, Modal } from 'react-native';
 
 const SecondScreen = () => {
-  const handleRayasPress = () => {
-    console.log('Botón de rayas presionado');
+  const [searchText, setSearchText] = useState('');
+  const [filteredBooks, setFilteredBooks] = useState([]);
+  const [selectedBook, setSelectedBook] = useState(null);
+
+  const allBooks = [
+    'Los 7 Enanitos',
+    'Cenicienta',
+    'Blancanieves',
+    'La Sirenita',
+    'La Bella y la Bestia',
+    'Aladino',
+  ];
+
+  const handleSearch = (text) => {
+    setSearchText(text);
+    const filtered = allBooks.filter(book => book.toLowerCase().includes(text.toLowerCase()));
+    setFilteredBooks(filtered);
   };
 
+  const handleBookSelect = (book) => {
+    setSelectedBook(book);
+    setSearchText(book);
+    setFilteredBooks([]); // Limpiar la lista de coincidencias
+    console.log(`Seleccionaste: ${book}`);
+  };
+  
+  
+  const [isModalVisible, setIsModalVisible] = useState(false); // Estado para controlar la visibilidad del modal
+
+  const openModal = () => {
+    setIsModalVisible(true);
+  };
+
+  const closeModal = () => {
+    setIsModalVisible(false);
+  };
+  useEffect(() => {
+    handleSearch(searchText);
+  }, []); 
   return (
     <View style={styles.containerb}>
       <View style={styles.content}>
@@ -17,32 +49,83 @@ const SecondScreen = () => {
         </View>
         <View style={styles.grayRectangle}>
           <View style={styles.inputContainer}>
-            <TextInput style={styles.input} placeholder="Seleccione un libro" />
-            <TextInput style={styles.input} placeholder="Agregue una nota sobre su libro" />
+            <TextInput
+              style={styles.input}
+              placeholder="Seleccione un libro"
+              onChangeText={handleSearch}
+              value={searchText}
+            />
+            {filteredBooks.length > 0 && (
+              <FlatList
+                data={filteredBooks}
+                renderItem={({ item }) => (
+                  <TouchableOpacity
+                    style={[
+                      styles.searchResultItem,
+                      selectedBook === item && styles.selectedItem,
+                    ]}
+                    onPress={() => handleBookSelect(item)}
+                  >
+                    <Text>{item}</Text>
+                  </TouchableOpacity>
+                )}
+                keyExtractor={(item) => item}
+              />
+            )}
           </View>
-          <TouchableOpacity style={styles.button}>
+          <View style={styles.inputContainer}>
+            <TextInput
+              style={styles.input}
+              placeholder="Añadir Nota"
+            />
+          </View>
+          <TouchableOpacity style={styles.button} onPress={openModal}>
             <Text style={styles.buttonText}>Generar QR</Text>
           </TouchableOpacity>
         </View>
       </View>
-      <View style={styles.footer}>
-        <Image source={require('../../assets/logo.png')} style={styles.logo} />
-      </View>
+      <Modal
+  animationType="slide" // Tipo de animación del modal
+  transparent={true} // Hace que el modal sea transparente
+  visible={isModalVisible} // Controla la visibilidad del modal
+  onRequestClose={closeModal} // Función para cerrar el modal (puede ser un botón de "Cerrar" también)
+>
+  <View style={styles.modalContainer}>
+    <View style={styles.modalCustom}>
+    <Image source={require('/img/qrprueba.jpg')} style={styles.modalImage} />
+    {/* Puedes agregar más contenido aquí */}
+    <TouchableOpacity style={styles.closeButton} onPress={closeModal}>
+      <Text style={styles.closeButtonText}>Cerrar</Text>
+    </TouchableOpacity>
     </View>
+  </View>
+</Modal>
+    </View>
+
+
+
+
   );
 };
 
-
-
 const styles = StyleSheet.create({
-
-
   container: {
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
   },
+  modalCustom: {
+    backgroundColor: 'white',
+    padding: 40,
+    borderRadius: 10,
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 3 },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+  },  
   containerb: {
     flex: 1,
     justifyContent: 'flex-start',
@@ -131,7 +214,38 @@ const styles = StyleSheet.create({
     height: 100,
 
   },
-
+  searchResultItem: {
+    paddingVertical: 10,
+    borderBottomWidth: 1,
+    borderBottomColor: '#E0E0E0',
+    backgroundColor: 'white',
+    borderRadius: 5,
+  },
+  selectedItem: {
+    backgroundColor: '#0D47A1',
+    color: 'white',
+  },
+  modalContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)', // Fondo semi-transparente
+  },
+  modalImage: {
+    width: 200,
+    height: 200,
+    marginBottom: 20,
+  },
+  closeButton: {
+    backgroundColor: '#0D47A1',
+    padding: 10,
+    borderRadius: 5,
+    marginTop: 10,
+  },
+  closeButtonText: {
+    color: 'white',
+    textAlign: 'center',
+  },
 });
 
 export default SecondScreen;
