@@ -1,7 +1,8 @@
 import React from 'react';
 import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { RNCamera } from 'react-native-camera';
+
+
 
 const BibliotecaOrtScreen = () => {
   const navigation = useNavigation();
@@ -17,7 +18,8 @@ const BibliotecaOrtScreen = () => {
         <TouchableOpacity onPress={handleScanQRPress}>
           <View style={styles.circle}>
             <Text style={styles.buttonText}>Escanear QR del alumno</Text>
-           
+            
+
           </View>
         </TouchableOpacity>
       </View>
@@ -29,15 +31,7 @@ const BibliotecaOrtScreen = () => {
 
     
   );
-  const CameraScreen = () => {
-  const handleTakePicture = async () => {
-    if (this.camera) {
-      const options = { quality: 0.5, base64: true };
-      const data = await this.camera.takePictureAsync(options);
-      console.log(data.uri); // Esto imprimirá la ruta de la imagen capturada
-    }
-  };
-};
+
 
 const styles = StyleSheet.create({
   container: {
@@ -62,7 +56,7 @@ const styles = StyleSheet.create({
     width: 300,
     height: 80,
     backgroundColor: '#3D6697',
-    borderRadius: 40, // Para hacer un círculo, el radio debe ser la mitad del ancho/alto
+    borderRadius: 40, 
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -75,6 +69,6 @@ const styles = StyleSheet.create({
     height: 100,
   },
 });
-
+}
 export default BibliotecaOrtScreen;
 

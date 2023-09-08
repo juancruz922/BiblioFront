@@ -1,12 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, TextInput, Image, FlatList, Modal } from 'react-native';
+import QRCode from 'react-native-qrcode-svg';
 
 const SecondScreen = () => {
   const [searchText, setSearchText] = useState('');
+  const [note, setNote] = useState('');
   const [filteredBooks, setFilteredBooks] = useState([]);
   const [selectedBook, setSelectedBook] = useState(null);
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [qrData, setQRData] = useState('');
 
-  const allBooks = [
+  const libros = [
     'Los 7 Enanitos',
     'Cenicienta',
     'Blancanieves',
@@ -17,30 +21,26 @@ const SecondScreen = () => {
 
   const handleSearch = (text) => {
     setSearchText(text);
-    const filtered = allBooks.filter(book => book.toLowerCase().includes(text.toLowerCase()));
+    const filtered = libros.filter(book => book.toLowerCase().includes(text.toLowerCase()));
     setFilteredBooks(filtered);
   };
 
   const handleBookSelect = (book) => {
     setSelectedBook(book);
     setSearchText(book);
-    setFilteredBooks([]); // Limpiar la lista de coincidencias
+    setFilteredBooks([]);
     console.log(`Seleccionaste: ${book}`);
   };
-  
-  
-  const [isModalVisible, setIsModalVisible] = useState(false); // Estado para controlar la visibilidad del modal
 
   const openModal = () => {
+    setQRData(`Libro: ${selectedBook}\nNota: ${note}`);
     setIsModalVisible(true);
   };
 
   const closeModal = () => {
     setIsModalVisible(false);
   };
-  useEffect(() => {
-    handleSearch(searchText);
-  }, []); 
+
   return (
     <View style={styles.containerb}>
       <View style={styles.content}>
@@ -77,6 +77,8 @@ const SecondScreen = () => {
             <TextInput
               style={styles.input}
               placeholder="Añadir Nota"
+              onChangeText={(text) => setNote(text)}
+              value={note}
             />
           </View>
           <TouchableOpacity style={styles.button} onPress={openModal}>
@@ -85,29 +87,29 @@ const SecondScreen = () => {
         </View>
       </View>
       <Modal
-  animationType="slide" // Tipo de animación del modal
-  transparent={true} // Hace que el modal sea transparente
-  visible={isModalVisible} // Controla la visibilidad del modal
-  onRequestClose={closeModal} // Función para cerrar el modal (puede ser un botón de "Cerrar" también)
->
-  <View style={styles.modalContainer}>
-    <View style={styles.modalCustom}>
-    <Image source={require('/assets/qrprueba.jpg')} style={styles.modalImage} />
-    {/* Puedes agregar más contenido aquí */}
-    <TouchableOpacity style={styles.closeButton} onPress={closeModal}>
-      <Text style={styles.closeButtonText}>Cerrar</Text>
-    </TouchableOpacity>
+        animationType="slide"
+        transparent={true}
+        visible={isModalVisible}
+        onRequestClose={closeModal}
+      >
+        <View style={styles.modalContainer}>
+          <View style={styles.modalCustom}>
+          <QRCode
+  value={qrData}
+  size={300} // Aumenta el tamaño del código QR
+  color="black"
+  backgroundColor="white"
+/>
+
+            <TouchableOpacity style={styles.closeButton} onPress={closeModal}>
+              <Text style={styles.closeButtonText}>Cerrar</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </Modal>
     </View>
-  </View>
-</Modal>
-    </View>
-
-
-
-
   );
 };
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,

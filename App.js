@@ -4,7 +4,6 @@ import Main from './src/components/Main';
 import Segunda from './src/components/Segunda';
 import Tercera from './src/components/Tercera';
 import biblio1 from './src/components/biblio1';
-import Qr from './src/components/Qr';
 import { Entypo } from '@expo/vector-icons';
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { NavigationContainer,useNavigation  } from "@react-navigation/native";
@@ -78,23 +77,6 @@ export default function App() {
           component={Tercera}
         />
         
-        <Menu.Screen
-          name ="QR"  
-          options={{
-            headerTitle: null,
-            
-            drawerIcon: ({ color, size }) => (
-              <Ionicons name="ios-qr-code" size={24} color="black" />
-            ),
-            drawerLabel: ({ focused, color }) => (
-              <Text style={[styles.drawerLabel, focused && { fontWeight: 'bold' }]}>
-                Mi QR
-              </Text>
-            ),
-          }}
-          component={Qr}
-
-        />
         <Menu.Screen
           name ="bibliooo"  
           options={{
