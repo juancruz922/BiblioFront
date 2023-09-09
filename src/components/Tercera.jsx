@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, TouchableOpacity, TextInput, Image } from 'reac
 import { MaterialIcons } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons';
 import { Entypo } from '@expo/vector-icons';
+import Main from './Main.jsx';
 export function Tercera() {
   return (
     <View style={styles.container}>

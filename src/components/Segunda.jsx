@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, TextInput, Image, FlatList, Modal } from 'react-native';
 import QRCode from 'react-native-qrcode-svg';
+import Main from './Main.jsx';
 
 const SecondScreen = () => {
   const [searchText, setSearchText] = useState('');

@@ -1,56 +1,53 @@
-import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, TextInput, Image, Button } from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, StyleSheet, TouchableOpacity, TextInput, Image} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import Segunda from './Segunda.jsx'
-import { Tercera } from './Tercera.jsx';
-import { interpolate } from 'react-native-reanimated';
+import Segunda from './Segunda.jsx';
+import Tercera from './Tercera.jsx';
 
-
-
-const App = ({ navigation }) => {
+const App = () => {
+  const navigation = useNavigation();
   const [dni, setDNI] = useState('');
   const [contraseña, setContraseña] = useState('');
 
-  // Definir el array de alumnos con DNI y contraseña
-  const alumnos = [
+  // Crear arrays de estudiantes y bibliotecarios
+  const estudiantes = [
     { dni: '11111111A', contraseña: 'clave1' },
     { dni: '22222222B', contraseña: 'clave2' },
     { dni: '33333333C', contraseña: 'clave3' },
-    { dni: '44444444D', contraseña: 'clave4' },
-    { dni: '55555555E', contraseña: 'clave5' },
   ];
 
-  // Definir el array de bibliotecarios con DNI y contraseña
   const bibliotecarios = [
     { dni: '66666666F', contraseña: 'clave6' },
     { dni: '77777777G', contraseña: 'clave7' },
     { dni: '88888888H', contraseña: 'clave8' },
-    { dni: '99999999I', contraseña: 'clave9' },
-    { dni: '10101010J', contraseña: 'clave10' },
   ];
 
-  const irAPantalla = () => {
-    // Verificar si el DNI y la contraseña coinciden con un alumno
-    const alumnoEncontrado = alumnos.find(
-      (alumno) => alumno.dni === dni && alumno.contraseña === contraseña
+  const VerificarUsuario = () => {
+   
+    // Verificar si las credenciales coinciden con un estudiante
+    const estudianteEncontrado = estudiantes.find(
+      (estudiante) => estudiante.dni === dni && estudiante.contraseña === contraseña
     );
 
-    // Verificar si el DNI y la contraseña coinciden con un bibliotecario
-    const bibliotecarioEncontrado = bibliotecarios.find(
-      (bibliotecario) => bibliotecario.dni === dni && bibliotecario.contraseña === contraseña
-    );
-
-    if (alumnoEncontrado) {
-      // Navegar a la pantalla de alumno
+    if (estudianteEncontrado) {
+      // Navegar a la pantalla de estudiantes
       navigation.navigate(Segunda);
-    } else if (bibliotecarioEncontrado) {
-      // Navegar a la pantalla de bibliotecario
-      navigation.navigate(Tercera);
     } else {
-      // Mostrar un mensaje de error
+      // Verificar si las credenciales coinciden con un bibliotecario
+      const bibliotecarioEncontrado = bibliotecarios.find(
+        (bibliotecario) => bibliotecario.dni === dni && bibliotecario.contraseña === contraseña
+      );
+
+      if (bibliotecarioEncontrado) {
+        // Navegar a la pantalla de bibliotecarios
+        navigation.navigate(Tercera);
+      } else {
+        // Mostrar un mensaje de error si las credenciales no coinciden
+        alert('Usuario y/o contraseña incorrectos.Inténtalo de nuevo.');
+      }
     }
   };
-  
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Biblioteca Ort</Text>
@@ -71,12 +68,10 @@ const App = ({ navigation }) => {
               onChangeText={(text) => setContraseña(text)}
             />
           </View>
-          <TouchableOpacity style={[styles.button]}>
-            <Button
-              title="Iniciar sesión"
-              onPress={irAPantalla}
-              style={styles.login}
-            ></Button>
+          <TouchableOpacity style={styles.button} onPress={VerificarUsuario}>
+            <View style={styles.login}>
+              <Text>Iniciar sesión</Text>
+            </View>
           </TouchableOpacity>
         </View>
       </View>
@@ -87,6 +82,7 @@ const App = ({ navigation }) => {
   );
 };
 
+// ... Estilos (mismos estilos que proporcionaste)
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -127,9 +123,11 @@ const styles = StyleSheet.create({
   },
   button: {
 
-    height:100,
+    height: 100, 
     alignItems: 'center',
     justifyContent: 'center',
+    
+    
     
   },
   
@@ -155,5 +153,5 @@ const styles = StyleSheet.create({
     height: 100,
   },
 });
-
 export default App;
+
