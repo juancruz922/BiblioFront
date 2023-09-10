@@ -22,8 +22,12 @@ const SecondScreen = () => {
 
   const handleSearch = (text) => {
     setSearchText(text);
+    setSelectedBook(text)
     const filtered = libros.filter(book => book.toLowerCase().includes(text.toLowerCase()));
-    setFilteredBooks(filtered);
+    setFilteredBooks(filtered); 
+    
+   
+   
   };
 
   const handleBookSelect = (book) => {
@@ -34,12 +38,24 @@ const SecondScreen = () => {
   };
 
   const openModal = () => {
-    setQRData(`Libro: ${selectedBook}\nNota: ${note}`);
-    setIsModalVisible(true);
+    const librocoincide = libros.find(
+      (libro) => libro.toLowerCase() === selectedBook.toLowerCase()
+      
+    );
+    if (librocoincide) {
+      setQRData(`Libro: ${selectedBook}\nNota: ${note}`);
+      setIsModalVisible(true);
+    }
+    else
+    {
+      alert('Seleccione un libro de la lista')
+    }
   };
 
   const closeModal = () => {
     setIsModalVisible(false);
+    setSelectedBook('')
+    setSearchText('')
   };
 
   return (
@@ -53,6 +69,7 @@ const SecondScreen = () => {
             <TextInput
               style={styles.input}
               placeholder="Seleccione un libro"
+              onFocus={()=>setFilteredBooks(libros)}
               onChangeText={handleSearch}
               value={searchText}
             />
@@ -87,9 +104,6 @@ const SecondScreen = () => {
           </TouchableOpacity>
         </View>
       </View>
-      <View style={styles.imageContainer}>
-        <Image source={require('../../assets/logo.png')} style={styles.logo} />
-      </View>
       <Modal
         animationType="slide"
         transparent={true}
@@ -100,7 +114,7 @@ const SecondScreen = () => {
           <View style={styles.modalCustom}>
           <QRCode
   value={qrData}
-  size={230} 
+  size={300} 
   color="black"
   backgroundColor="white"
 />
@@ -179,7 +193,7 @@ const styles = StyleSheet.create({
   },
   grayRectangle: {
     width: '80%',
-    height: '50%',
+    height: '70%',
     backgroundColor: '#E0E0E0',
     borderRadius: 10,
     marginTop: 20,
@@ -206,7 +220,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 10,
-    margintop: 30,
   },
   buttonText: {
     fontSize: 16,

@@ -61,7 +61,7 @@ const App = () => {
           />
         </View>
         <View style={styles.inputContainer}>
-          <MaterialIcons name="lock" size={24} color="black" style={styles.icon} /> {/* Icono de contraseña */}
+          <MaterialIcons name="lock" size={24} color="black" style={styles.icon} />
           <TextInput
             style={styles.input}
             placeholder="Contraseña"
