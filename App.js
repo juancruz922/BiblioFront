@@ -61,7 +61,7 @@ export default function App() {
         />
         
         <Menu.Screen
-          name="."
+          name="Tercera"
           options={{
             headerTitle: null,
       
@@ -78,7 +78,7 @@ export default function App() {
         />
         
         <Menu.Screen
-          name ="bibliooo"  
+          name ="biblio1"  
           options={{
             headerTitle: null,
             
@@ -97,24 +97,6 @@ export default function App() {
       </Menu.Navigator>
     </NavigationContainer>
   );
-
-  <Menu.Screen
-          name="Bilio"
-
-          options={({navigation})=>( {
-            headerShown:false,
-            
-            drawerLabel: ({ focused, color }) => (
-              <View style={styles.logout}>
-              <Text  style={[styles.drawerLabel, focused && { fontWeight: 'bold' }]}> 
-                Bibliotecario
-              </Text>
-</ View>
-          ),            
-          headerShown: false 
-          })}
-          component={biblio1}
-        />
   
 }
 

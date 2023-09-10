@@ -87,6 +87,9 @@ const SecondScreen = () => {
           </TouchableOpacity>
         </View>
       </View>
+      <View style={styles.imageContainer}>
+        <Image source={require('../../assets/logo.png')} style={styles.logo} />
+      </View>
       <Modal
         animationType="slide"
         transparent={true}
@@ -97,7 +100,7 @@ const SecondScreen = () => {
           <View style={styles.modalCustom}>
           <QRCode
   value={qrData}
-  size={300} // Aumenta el tamaño del código QR
+  size={230} 
   color="black"
   backgroundColor="white"
 />
@@ -117,6 +120,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
+    
   },
   modalCustom: {
     backgroundColor: 'white',
@@ -175,7 +179,7 @@ const styles = StyleSheet.create({
   },
   grayRectangle: {
     width: '80%',
-    height: '70%',
+    height: '50%',
     backgroundColor: '#E0E0E0',
     borderRadius: 10,
     marginTop: 20,
@@ -184,6 +188,7 @@ const styles = StyleSheet.create({
   },
   inputContainer: {
     flex: 1,
+    
   },
   input: {
     width: '100%',
@@ -201,6 +206,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 10,
+    margintop: 30,
   },
   buttonText: {
     fontSize: 16,

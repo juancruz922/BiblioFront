@@ -1,29 +1,29 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, TextInput, Image} from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, TextInput, Image } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import Segunda from './Segunda.jsx';
 import Tercera from './Tercera.jsx';
+import biblio1 from './biblio1.jsx';
+import { AntDesign } from '@expo/vector-icons';
+import { MaterialIcons } from '@expo/vector-icons';
+import { Ionicons } from '@expo/vector-icons';
 
 const App = () => {
   const navigation = useNavigation();
   const [dni, setDNI] = useState('');
   const [contraseña, setContraseña] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
 
   // Crear arrays de estudiantes y bibliotecarios
   const estudiantes = [
-    { dni: '11111111A', contraseña: 'clave1' },
-    { dni: '22222222B', contraseña: 'clave2' },
-    { dni: '33333333C', contraseña: 'clave3' },
+    { dni: '1', contraseña: '1' },
   ];
 
   const bibliotecarios = [
-    { dni: '66666666F', contraseña: 'clave6' },
-    { dni: '77777777G', contraseña: 'clave7' },
-    { dni: '88888888H', contraseña: 'clave8' },
+    { dni: '2', contraseña: '2' },
   ];
 
   const VerificarUsuario = () => {
-   
     // Verificar si las credenciales coinciden con un estudiante
     const estudianteEncontrado = estudiantes.find(
       (estudiante) => estudiante.dni === dni && estudiante.contraseña === contraseña
@@ -31,7 +31,7 @@ const App = () => {
 
     if (estudianteEncontrado) {
       // Navegar a la pantalla de estudiantes
-      navigation.navigate(Segunda);
+      navigation.navigate('Segunda');
     } else {
       // Verificar si las credenciales coinciden con un bibliotecario
       const bibliotecarioEncontrado = bibliotecarios.find(
@@ -40,10 +40,10 @@ const App = () => {
 
       if (bibliotecarioEncontrado) {
         // Navegar a la pantalla de bibliotecarios
-        navigation.navigate(Tercera);
+        navigation.navigate('biblio1');
       } else {
         // Mostrar un mensaje de error si las credenciales no coinciden
-        alert('Usuario y/o contraseña incorrectos.Inténtalo de nuevo.');
+        alert('Usuario y/o contraseña incorrectos. Inténtalo de nuevo.');
       }
     }
   };
@@ -52,28 +52,39 @@ const App = () => {
     <View style={styles.container}>
       <Text style={styles.title}>Biblioteca Ort</Text>
       <View style={styles.content}>
-        <View style={styles.rectangle}>
-          <View style={styles.inputContainer}>
-            <TextInput
-              style={styles.input}
-              placeholder="  D.N.I"
-              onChangeText={(text) => setDNI(text)}
-            />
-          </View>
-          <View style={styles.inputContainer}>
-            <TextInput
-              style={styles.input}
-              placeholder="  Contraseña"
-              secureTextEntry={true}
-              onChangeText={(text) => setContraseña(text)}
-            />
-          </View>
-          <TouchableOpacity style={styles.button} onPress={VerificarUsuario}>
-            <View style={styles.login}>
-              <Text>Iniciar sesión</Text>
-            </View>
+        <View style={styles.inputContainer}>
+          <AntDesign name="user" size={24} color="black" style={styles.icon} /> {/* Icono de usuario */}
+          <TextInput
+            style={styles.input}
+            placeholder="D.N.I"
+            onChangeText={(text) => setDNI(text)}
+          />
+        </View>
+        <View style={styles.inputContainer}>
+          <MaterialIcons name="lock" size={24} color="black" style={styles.icon} /> {/* Icono de contraseña */}
+          <TextInput
+            style={styles.input}
+            placeholder="Contraseña"
+            secureTextEntry={!showPassword}
+            onChangeText={(text) => setContraseña(text)}
+          />
+          <TouchableOpacity
+            style={styles.toggleButton}
+            onPress={() => setShowPassword(!showPassword)}>
+            <Text>
+              {showPassword ? (
+                <AntDesign name="eyeo" size={24} color="black" />
+              ) : (
+                <Ionicons name="eye-off-outline" size={24} color="black" />
+              )}
+            </Text>
           </TouchableOpacity>
         </View>
+        <TouchableOpacity style={styles.loginButton} onPress={VerificarUsuario}>
+          <View style={styles.login}>
+            <Text style={styles.loginText}>Iniciar sesión</Text>
+          </View>
+        </TouchableOpacity>
       </View>
       <View style={styles.imageContainer}>
         <Image source={require('../../assets/logo.png')} style={styles.logo} />
@@ -82,7 +93,6 @@ const App = () => {
   );
 };
 
-// ... Estilos (mismos estilos que proporcionaste)
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -90,57 +100,53 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingTop: 50,
   },
-
-  login:{
-    color: '#0D47A1',
-    
-  },
   title: {
-    fontSize: 40,
+    fontSize: 60,
     fontWeight: 'bold',
     color: '#0D47A1',
     marginBottom: 40,
     fontFamily: 'serif',
-    marginTop:20,
+    marginTop: 20,
   },
   content: {
     flex: 1,
-    width: '100%',
+    width: '80%',
     marginTop: '8%',
     alignItems: 'center',
-
   },
   inputContainer: {
+    flexDirection: 'row', // Usamos flexDirection para alinear el icono y el input en fila
+    alignItems: 'center', // Centramos verticalmente
     marginBottom: 20,
-    width: '80%',
+    width: '100%',
   },
   input: {
     height: 55,
     borderWidth: 2,
     width: '100%',
     borderRadius: 20,
-    marginLeft: 27
+    paddingLeft: 10,
   },
-  button: {
-
-    height: 100, 
-    alignItems: 'center',
-    justifyContent: 'center',
-    
-    
-    
+  icon: {
+    marginRight: 10, // Margen derecho para separar el icono del input
   },
-  
-
-  rectangle: {
-    backgroundColor: '#E0E0E0',
-    width: '80%',
+  toggleButton: {
+    position: 'absolute',
+    right: 10,
+    top: 20,
+  },
+  loginButton: {
+    backgroundColor: '#0D47A1',
+    width: '100%',
     borderRadius: 20,
-    height: '130%',
-    marginTop: 0,
-    display: "flex",
+    height: 55,
     justifyContent: 'center',
-  
+    alignItems: 'center',
+    marginTop: 20,
+  },
+  loginText: {
+    color: 'white',
+    fontSize: 18,
   },
   imageContainer: {
     flex: 1,
@@ -153,5 +159,5 @@ const styles = StyleSheet.create({
     height: 100,
   },
 });
-export default App;
 
+export default App;
