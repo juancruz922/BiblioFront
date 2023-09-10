@@ -13,13 +13,14 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { SimpleLineIcons } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
 
-const Stack = createStackNavigator();
+const CustomStack = createStackNavigator();
 
 const Menu = createDrawerNavigator();
 
 export default function App() {
   return (
     <NavigationContainer>
+      
       <Menu.Navigator>
 
       <Menu.Screen
@@ -77,26 +78,15 @@ export default function App() {
           component={Tercera}
         />
         
-        <Menu.Screen
-          name ="biblio1"  
-          options={{
-            headerTitle: null,
-            
-            drawerIcon: ({ color, size }) => (
-              <Ionicons name="ios-qr-code" size={24} color="black" />
-            ),
-            drawerLabel: ({ focused, color }) => (
-              <Text style={[styles.drawerLabel, focused && { fontWeight: 'bold' }]}>
-                Bibliotecario
-              </Text>
-            ),
-          }}
-          component={biblio1}
-
-        />
+        
       </Menu.Navigator>
+     
     </NavigationContainer>
+
+
+
   );
+  
   
 }
 

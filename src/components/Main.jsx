@@ -22,6 +22,7 @@ const App = () => {
   const bibliotecarios = [
     { dni: '2', contraseña: '2' },
   ];
+  
 
   const VerificarUsuario = () => {
     // Verificar si las credenciales coinciden con un estudiante
@@ -41,6 +42,7 @@ const App = () => {
       if (bibliotecarioEncontrado) {
         // Navegar a la pantalla de bibliotecarios
         navigation.navigate('biblio1');
+        console.log('hola')
       } else {
         // Mostrar un mensaje de error si las credenciales no coinciden
         alert('Usuario y/o contraseña incorrectos. Inténtalo de nuevo.');

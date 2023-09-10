@@ -94,7 +94,7 @@ const SecondScreen = () => {
           <View style={styles.inputContainer}>
             <TextInput
               style={styles.input}
-              placeholder="Añadir Nota"
+              placeholder="Añadir Nota ( opcional)"
               onChangeText={(text) => setNote(text)}
               value={note}
             />
