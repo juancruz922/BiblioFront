@@ -1,32 +1,15 @@
 import React from 'react';
 import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-
+import usuarios from '../data/usuarios'; // Importar los datos de usuarios
 
 
 const BibliotecaOrtScreen = () => {
-  const navigation = useNavigation();
 
-  const handleScanQRPress = () => {
-    // Agrega la lógica para abrir la cámara del celular aquí.
-  };
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>BibliotecaOrt</Text>
-      <View style={styles.circleContainer}>
-        <TouchableOpacity onPress={handleScanQRPress}>
-          <View style={styles.circle}>
-            <Text style={styles.buttonText}>Escanear QR del alumno</Text>
-            
-
-          </View>
-        </TouchableOpacity>
-      </View>
-      <Image
-        source={require('../../assets/logo.png')} 
-        style={styles.image}
-      />
+    <View>
+    <Text>Hola</Text>
     </View>
 
     

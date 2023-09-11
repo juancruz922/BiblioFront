@@ -1,104 +1,98 @@
+import React, { useState } from 'react';
+import { View, Text, StyleSheet } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, TouchableWithoutFeedback } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import { createStackNavigator } from '@react-navigation/stack';
+import { Entypo, Feather, SimpleLineIcons } from '@expo/vector-icons';
+
+import Login from './src/components/Login';
 import Main from './src/components/Main';
 import Segunda from './src/components/Segunda';
 import Tercera from './src/components/Tercera';
-import biblio1 from './src/components/biblio1';
-import { Entypo } from '@expo/vector-icons';
-import { createDrawerNavigator } from "@react-navigation/drawer";
-import { NavigationContainer,useNavigation  } from "@react-navigation/native";
-import "react-native-gesture-handler";
-import { Feather } from '@expo/vector-icons';
-import { createStackNavigator } from '@react-navigation/stack';
-import { SimpleLineIcons } from '@expo/vector-icons';
-import { Ionicons } from '@expo/vector-icons';
+import Biblio1 from './src/components/biblio1';
 
-const CustomStack = createStackNavigator();
-
+const Stack = createStackNavigator();
 const Menu = createDrawerNavigator();
 
-export default function App() {
+function App() {
+  const [estadoUsuario, setEstadoUsuario] = useState(0);
+  const [rolUsuario, setRolUsuario] = useState(0);
+
+  
+  if (estadoUsuario === 0) {
+    return (
+      <View style={{ flex: 1 }}>
+        <Login setEstadoUsuario={setEstadoUsuario} setRolUsuario={setRolUsuario} />
+      </View>
+    );
+  }
+
+
   return (
-    <NavigationContainer>
+
+    <View style={{width: "100%"}}>
       
+      {rolUsuario === 2 ? (
+      <View style={styles.container}>
+        <Biblio1 />
+      </View>
+    ) : ( 
+      
+      <NavigationContainer>
       <Menu.Navigator>
 
-      <Menu.Screen
-          name="App"
 
-          options={({navigation})=>( {
-            headerShown:false,
-            drawerIcon: ({ color, size }) => (
-<SimpleLineIcons name="logout" size={24} color="black"/>
-            ),
-            drawerLabel: ({ focused, color }) => (
-              <View style={styles.logout}>
-              <Text  style={[styles.drawerLabel, focused && { fontWeight: 'bold' }]}> 
-                Log Out
-              </Text>
-</ View>
-          ),            
-          headerShown: false 
-          })}
-          component={Main}
-        />
-        
         <Menu.Screen
-          name ="Segunda"  
+          name="Segunda"
           options={{
             headerTitle: null,
-        
             drawerIcon: ({ color, size }) => (
-              <Entypo name="open-book" size={24} color="black" /> 
+              <Entypo name="open-book" size={24} color="black" />
             ),
             drawerLabel: ({ focused, color }) => (
-              <Text style={[styles.drawerLabel, focused && { fontWeight: 'bold' }]}>
+              <Text style={[styles.drawerText, focused && { fontWeight: 'bold' }]}>
                 Retiro
               </Text>
             ),
           }}
           component={Segunda}
-
         />
-        
+
         <Menu.Screen
           name="Tercera"
           options={{
             headerTitle: null,
-      
             drawerIcon: ({ color, size }) => (
               <Feather name="clock" size={24} color="black" />
             ),
             drawerLabel: ({ focused, color }) => (
-              <Text style={[styles.drawerLabel, focused && { fontWeight: 'bold' }]}>
+              <Text style={[styles.drawerText, focused && { fontWeight: 'bold' }]}>
                 Mis préstamos
               </Text>
             ),
           }}
           component={Tercera}
         />
-        
-        
+
       </Menu.Navigator>
-     
     </NavigationContainer>
-
-
-
+    )}
+    
+    </View>
+   
   );
-  
-  
 }
-
 
 const styles = StyleSheet.create({
   drawerLabel: {
     fontSize: 20,
     color: 'black',
-
   },
-
-
-
-
+  drawerText: {
+    fontSize: 20,
+    color: 'black',
+  },
 });
+
+export default App;
