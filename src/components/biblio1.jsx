@@ -1,57 +1,67 @@
-import React from 'react';
-import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-import usuarios from '../data/usuarios'; // Importar los datos de usuarios
+import { Camera, CameraType } from 'expo-camera';
+import { useState } from 'react';
+import { Button, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
+export default function App() {
+  const [type, setType] = useState(CameraType.back);
+  const [permission, requestPermission] = Camera.useCameraPermissions();
 
-const BibliotecaOrtScreen = () => {
+  if (!permission) {
+    // Camera permissions are still loading
+    return <View />;
+  }
 
+  if (!permission.granted) {
+    // Camera permissions are not granted yet
+    return (
+      <View style={styles.container}>
+        <Text style={{ textAlign: 'center' }}>We need your permission to show the camera</Text>
+        <Button onPress={requestPermission} title="grant permission" />
+      </View>
+    );
+  }
+  
+  
+
+  function toggleCameraType() {
+    setType(current => (current === CameraType.back ? CameraType.front : CameraType.back));
+  }
 
   return (
-    <View>
-    <Text>Hola</Text>
+    <View style={styles.container}>
+      <Camera style={styles.camera} type={type}>
+        <View style={styles.buttonContainer}>
+          <TouchableOpacity style={styles.button} onPress={toggleCameraType}>
+            <Text style={styles.text}>Flip Camera</Text>
+          </TouchableOpacity>
+        </View>
+      </Camera>
     </View>
-
-    
   );
-
+}
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
     justifyContent: 'center',
   },
-  title: {
-    fontSize: 40,
-    fontWeight: 'bold',
-    color: '#0D47A1',
-    marginBottom: 40,
-    fontFamily: 'serif',
-    marginTop:20,
-  },
-  circleContainer: {
+  camera: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
   },
-  circle: {
-    width: 300,
-    height: 80,
-    backgroundColor: '#3D6697',
-    borderRadius: 40, 
-    alignItems: 'center',
-    justifyContent: 'center',
+  buttonContainer: {
+    flex: 1,
+    flexDirection: 'row',
+    backgroundColor: 'transparent',
+    margin: 64,
   },
-  buttonText: {
+  button: {
+    flex: 1,
+    alignSelf: 'flex-end',
+    alignItems: 'center',
+  },
+  text: {
+    fontSize: 24,
+    fontWeight: 'bold',
     color: 'white',
-    fontSize: 18,
-  },
-  image: {
-    width: 100,
-    height: 100,
   },
 });
-}
-export default BibliotecaOrtScreen;
-
