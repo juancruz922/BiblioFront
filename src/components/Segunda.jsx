@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, TextInput, Image, FlatList, Modal } from 'react-native';
 import QRCode from 'react-native-qrcode-svg';
 import Main from './Main.jsx';
+import usuarios from '../data/usuarios';
 
 const SecondScreen = () => {
   const [searchText, setSearchText] = useState('');
@@ -43,7 +44,7 @@ const SecondScreen = () => {
       
     );
     if (librocoincide) {
-      setQRData(`Libro: ${selectedBook}\nNota: ${note}`);
+      setQRData(`Libro: ${selectedBook}\nNota: ${note}\nUsuario: ${usuarios.nombre}`);
       setIsModalVisible(true);
     }
     else
