@@ -45,8 +45,7 @@ const SecondScreen = ({ route }) => {
       
     );
     if (librocoincide) {
-      setQRData(`Libro: ${selectedBook}\nUsuario: ${usuario.nombre}\nNota: ${note}`);
-      alert(`Libro: ${selectedBook}\nNota: ${note}\nUsuario: ${usuario.nombre}`);
+      setQRData(`Libro: ${selectedBook} / Nota: ${note} / Usuario: ${usuario.nombre}`);
       setIsModalVisible(true);
     }
     else
