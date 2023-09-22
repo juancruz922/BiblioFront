@@ -17,15 +17,20 @@ const Menu = createDrawerNavigator();
 
 function App() {
   const [estadoUsuario, setEstadoUsuario] = useState(0);
-  const [rolUsuario, setRolUsuario] = useState(0);
+  const [usuario, setUsuario] = useState(0);
 
   
   if (estadoUsuario === 0) {
     return (
       <View style={{ flex: 1 }}>
-        <Login setEstadoUsuario={setEstadoUsuario} setRolUsuario={setRolUsuario} />
+        <Login setEstadoUsuario={setEstadoUsuario} setUsuario={setUsuario} />
       </View>
     );
+  }
+
+  function Logout() {
+    setEstadoUsuario(0);
+    setUsuario(0);
   }
 
 
@@ -33,7 +38,7 @@ function App() {
 
     <View style={{width: "100%"}}>
       
-      {rolUsuario === 2 ? (
+      {usuario.rol === 2 ? (
       <View style={styles.container}>
         <Biblio1 />
       </View>
@@ -75,7 +80,25 @@ function App() {
           component={Tercera}
         />
 
+
+        <Menu.Screen
+          name='Logout'
+          options={{
+            headerTitle: null,
+            drawerIcon: ({ color, size }) => (
+              <Feather name="Logout" size={24} color="black" />
+            ),
+            drawerLabel: ({ focused, color }) => (
+              <Text style={[styles.drawerText, focused && { fontWeight: 'bold' }]}>
+                {usuario.nombre}
+              </Text>
+            ),
+          }}
+          component={Logout}
+        />
+
       </Menu.Navigator>
+      
     </NavigationContainer>
     )}
     

@@ -3,7 +3,7 @@ import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-nativ
 import { Ionicons } from '@expo/vector-icons'; // Importar el ícono para la contraseña
 import usuarios from '../data/usuarios'; // Importar los datos de usuarios
 
-const LoginScreen = ({ setEstadoUsuario, setRolUsuario }) => {
+const LoginScreen = ({ setEstadoUsuario, setUsuario }) => {
   const [nombreUsuario, setNombreUsuario] = useState('');
   const [contraseña, setContraseña] = useState('');
   const [mostrarContraseña, setMostrarContraseña] = useState(false); // Estado para mostrar/ocultar contraseña
@@ -15,7 +15,7 @@ const LoginScreen = ({ setEstadoUsuario, setRolUsuario }) => {
 
     if (usuarioEncontrado) {
       setEstadoUsuario(1); 
-      setRolUsuario(usuarioEncontrado.rol);
+      setUsuario(usuarioEncontrado);
       setMensaje('Inicio de sesión exitoso');
     } else {
       setMensaje('Credenciales incorrectas');
