@@ -4,7 +4,7 @@ import { StatusBar } from 'expo-status-bar';
 import { NavigationContainer } from '@react-navigation/native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { createStackNavigator } from '@react-navigation/stack';
-import { Entypo, Feather, SimpleLineIcons } from '@expo/vector-icons';
+import { Entypo, Feather, SimpleLineIcons,MaterialCommunityIcon} from '@expo/vector-icons';
 
 import Login from './src/components/Login';
 import Main from './src/components/Main';
@@ -47,6 +47,7 @@ function App() {
       <NavigationContainer>
       <Menu.Navigator>
 
+      
 
         <Menu.Screen
           name="Segunda"
@@ -64,6 +65,9 @@ function App() {
           }}
           component={Segunda}
         />
+
+ 
+
 
         <Menu.Screen
           name="Tercera"
@@ -87,7 +91,7 @@ function App() {
           options={{
             headerTitle: null,
             drawerIcon: ({ color, size }) => (
-              <Feather name="Logout" size={24} color="black" />
+              <SimpleLineIcons name="logout" size={24} color="black" />
             ),
             drawerLabel: ({ focused, color }) => (
               <Text style={[styles.drawerText, focused && { fontWeight: 'bold' }]}>
