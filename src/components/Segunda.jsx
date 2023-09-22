@@ -4,13 +4,14 @@ import QRCode from 'react-native-qrcode-svg';
 import Main from './Main.jsx';
 import usuarios from '../data/usuarios';
 
-const SecondScreen = () => {
+const SecondScreen = ({ route }) => {
   const [searchText, setSearchText] = useState('');
   const [note, setNote] = useState('');
   const [filteredBooks, setFilteredBooks] = useState([]);
   const [selectedBook, setSelectedBook] = useState(null);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [qrData, setQRData] = useState('');
+  const { usuario } = route.params;
 
   const libros = [
     'Los 7 Enanitos',
@@ -44,7 +45,8 @@ const SecondScreen = () => {
       
     );
     if (librocoincide) {
-      setQRData(`Libro: ${selectedBook}\nNota: ${note}\nUsuario: ${usuarios.nombre}`);
+      setQRData(`Libro: ${selectedBook}\nUsuario: ${usuario.nombre}\nNota: ${note}`);
+      alert(`Libro: ${selectedBook}\nNota: ${note}\nUsuario: ${usuario.nombre}`);
       setIsModalVisible(true);
     }
     else

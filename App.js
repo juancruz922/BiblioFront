@@ -50,6 +50,7 @@ function App() {
 
         <Menu.Screen
           name="Segunda"
+          initialParams={{ usuario: usuario }}
           options={{
             headerTitle: null,
             drawerIcon: ({ color, size }) => (
