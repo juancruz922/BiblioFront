@@ -3,6 +3,8 @@ import { View, Text, StyleSheet, TouchableOpacity, TextInput, Image, FlatList, M
 import QRCode from 'react-native-qrcode-svg';
 import Main from './Main.jsx';
 import usuarios from '../data/usuarios';
+import prestamos from '../data/prestamos';
+import libros from '../data/libros';
 
 const SecondScreen = ({ route }) => {
   const [searchText, setSearchText] = useState('');
@@ -13,51 +15,62 @@ const SecondScreen = ({ route }) => {
   const [qrData, setQRData] = useState('');
   const { usuario } = route.params;
 
-  const libros = [
-    'Los 7 Enanitos',
-    'Cenicienta',
-    'Blancanieves',
-    'La Sirenita',
-    'La Bella y la Bestia',
-    'Aladino',
-  ];
-
   const handleSearch = (text) => {
     setSearchText(text);
-    setSelectedBook(text)
-    const filtered = libros.filter(book => book.toLowerCase().includes(text.toLowerCase()));
-    setFilteredBooks(filtered); 
-    
-   
-   
+    setSelectedBook(text);
+    const filtered = libros.filter(book => book.titulo.toLowerCase().includes(text.toLowerCase()));
+    setFilteredBooks(filtered);
   };
 
   const handleBookSelect = (book) => {
-    setSelectedBook(book);
-    setSearchText(book);
+    setSelectedBook(book.titulo);
+    setSearchText(book.titulo);
     setFilteredBooks([]);
-    console.log(`Seleccionaste: ${book}`);
+    console.log(`Seleccionaste: ${book.titulo}`);
   };
 
   const openModal = () => {
-    const librocoincide = libros.find(
-      (libro) => libro.toLowerCase() === selectedBook.toLowerCase()
-      
+    const libroCoincide = libros.find(
+      (libro) => libro.titulo.toLowerCase() === selectedBook.toLowerCase()
     );
-    if (librocoincide) {
-      setQRData(`Libro: ${selectedBook} / Nota: ${note} / Usuario: ${usuario.nombre}`);
+  
+    if (libroCoincide) {
+      const fechaInicio = new Date(); // Obtiene la fecha y hora actual
+  
+      setQRData(`Libro: ${libroCoincide.titulo} / Nota: ${note} / Usuario: ${usuario.nombre}`);
+      prestamos.prestamo.push({
+        ...libroCoincide,
+        nota: note,
+        usuarioId: usuario.id,
+        fechaInicio: fechaInicio.toISOString(), // Guarda la fecha y hora en formato ISO
+      });
+  
       setIsModalVisible(true);
+    } else {
+      alert('Seleccione un libro de la lista');
     }
-    else
-    {
-      alert('Seleccione un libro de la lista')
-    }
+    console.log('Préstamos después de abrir el modal: ', prestamos.prestamo);
   };
+  
 
   const closeModal = () => {
+    const fechaFin = new Date(); // Obtiene la fecha y hora actual al cerrar el préstamo
+  
     setIsModalVisible(false);
-    setSelectedBook('')
-    setSearchText('')
+  
+    // Encuentra el préstamo correspondiente y establece la fechaFin
+    const prestamoActual = prestamos.prestamo.find(
+      (prestamo) => prestamo.titulo.toLowerCase() === selectedBook.toLowerCase()
+    );
+  
+    if (prestamoActual) {
+      prestamoActual.fechaFin = fechaFin.toISOString(); // Guarda la fecha y hora en formato ISO
+    }
+  
+    setSelectedBook('');
+    setSearchText('');
+    console.log('Préstamos después de cerrar el modal: ', prestamos.prestamo);
+    setRefresh(!refresh);
   };
 
   return (
@@ -76,21 +89,21 @@ const SecondScreen = ({ route }) => {
               value={searchText}
             />
             {filteredBooks.length > 0 && (
-              <FlatList
-                data={filteredBooks}
-                renderItem={({ item }) => (
-                  <TouchableOpacity
-                    style={[
-                      styles.searchResultItem,
-                      selectedBook === item && styles.selectedItem,
-                    ]}
-                    onPress={() => handleBookSelect(item)}
-                  >
-                    <Text>{item}</Text>
-                  </TouchableOpacity>
-                )}
-                keyExtractor={(item) => item}
-              />
+             <FlatList
+             data={filteredBooks}
+             renderItem={({ item }) => (
+               <TouchableOpacity
+                 style={[
+                   styles.searchResultItem,
+                   selectedBook === item.titulo && styles.selectedItem,
+                 ]}
+                 onPress={() => handleBookSelect(item)}
+               >
+                 <Text>{item.titulo}</Text>
+               </TouchableOpacity>
+             )}
+             keyExtractor={(item) => item.idLibro.toString()}
+           />
             )}
           </View>
           <View style={styles.inputContainer}>

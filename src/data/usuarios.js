@@ -1,9 +1,9 @@
 const usuarios = [
     {
       idUsuario: 1,
-      nombreUsuario: "admin1",
+      nombreUsuario: "1",
       nombre: "Binker",
-      contraseña: "adminpass1",
+      contraseña: "1",
       rol: 1, // admin
     },
     {
