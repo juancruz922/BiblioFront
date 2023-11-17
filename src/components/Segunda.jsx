@@ -41,7 +41,7 @@ const SecondScreen = ({ route }) => {
       prestamos.prestamo.push({
         ...libroCoincide,
         nota: note,
-        usuarioId: usuario.id,
+        usuarioId: usuario.idUsuario,
         fechaInicio: formatDate(fechaInicio), // Guarda la fecha y hora en formato ISO
       });
   

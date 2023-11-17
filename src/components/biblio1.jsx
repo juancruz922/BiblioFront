@@ -56,8 +56,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#D9D9D9',
-    width: windowWidth,
-    height: windowHeight,
+    width: '100vw',
+    height: '100vh',
   },
   camera: {
     flex: 1,

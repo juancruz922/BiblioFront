@@ -15,8 +15,8 @@ const usuarios = [
     },
     {
       idUsuario: 2,
-      nombreUsuario: "usuario1",
-      contraseña: "userpass1",
+      nombreUsuario: "2",
+      contraseña: "2",
       rol: 2, // usuario
     },
     {

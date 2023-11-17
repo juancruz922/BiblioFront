@@ -59,6 +59,11 @@ const PrestamosScreen = () => {
     }
   };
 
+
+  const handleLogout = () => {
+    setEstadoUsuario(0);
+    setUsuario(0);
+  };
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Lista de Préstamos</Text>
@@ -68,7 +73,7 @@ const PrestamosScreen = () => {
           <View style={styles.prestamoItem}>
             <Text>{`Libro: ${item.titulo}`}</Text>
             <Text>{`Nota: ${item.nota || 'N/A'}`}</Text>
-            <Text>{`Usuario: ${item.usuarioId}`}</Text>
+            <Text>{`Usuario: ${item.idUsuario}`}</Text>
             <Text>{`Fecha de Inicio: ${item.fechaInicio}`}</Text>
             <Text>{`Fecha de Fin: ${item.fechaFin || 'No cerrado'}`}</Text>
             {renderFinPrestamoButton(item)}
