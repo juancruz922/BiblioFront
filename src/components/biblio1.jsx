@@ -1,11 +1,13 @@
-import { Camera, CameraType } from 'expo-camera';
+import { Camera, CameraType, BarCodeScanningResult } from 'expo-camera';
 import React, { useState, useEffect } from 'react';
+import { useNavigation } from '@react-navigation/native';
 import { Button, StyleSheet, Text, TouchableOpacity, View, Dimensions } from 'react-native';
 
 export default function App() {
   const [type, setType] = useState(CameraType.back);
   const [permission, requestPermission] = Camera.useCameraPermissions();
-
+  const [scanned, setScanned] = useState(false);
+  const navigation = useNavigation();
   useEffect(() => {
     // Request camera permissions when the component mounts
     requestPermission();
@@ -19,13 +21,17 @@ export default function App() {
     return (
       <View style={styles.container}>
         <Text style={styles.title}>Biblioteca Ort</Text>
-        <View style={styles.botonqr}> 
-        <Button  onPress={requestPermission} title="Escanear QR del alumno" />
+        <View style={styles.botonqr}>
+          <Button onPress={requestPermission} title="Escanear QR del alumno" />
         </View>
-   
       </View>
     );
   }
+
+  const handleBarCodeScanned = () => {
+    console.log('entre');
+    navigation.navigate('Prestamos');
+  };
 
   function toggleCameraType() {
     setType((current) => (current === CameraType.back ? CameraType.front : CameraType.back));
@@ -33,12 +39,21 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      <Camera style={styles.camera} type={type}>
-        <View style={styles.blueRectangle}>
-          <Text style={styles.blueRectangleTitle}>Biblioteca Ort</Text>
-        </View>
+      <Camera
+        
+        type={type}
+        ratio="2340:1080"
+      >
         <View style={styles.buttonContainer}>
           <TouchableOpacity style={styles.button} onPress={toggleCameraType}>
+            <Text style={styles.buttonText}>Cambiar Cámara</Text>
+          </TouchableOpacity>
+        </View>
+        <View style={styles.bottomButtonContainer}>
+          <TouchableOpacity
+            style={{paddingLeft: 300}}
+            onPress={() => handleBarCodeScanned()}
+          >
             <Text style={styles.buttonText}>Escanear QR</Text>
           </TouchableOpacity>
         </View>
@@ -56,24 +71,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#D9D9D9',
-    width: '100vw',
-    height: '100vh',
   },
   camera: {
-    flex: 1,
-  },
-  blueRectangle: {
-    width: '100%',
-    height: '20%',
-    backgroundColor: '#0D47A1',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  blueRectangleTitle: {
-    fontSize: 38,
-    fontWeight: 'bold',
-    color: 'white',
-    fontFamily: 'serif',
+    width: windowWidth,
+    height: (windowWidth * 1080) / 2340,
   },
   title: {
     fontSize: 60,
@@ -87,27 +88,36 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#3D6697',
+  },
+  bottomButtonContainer: {
+    position: 'absolute',
+    bottom: 20,
+    width: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   button: {
     backgroundColor: '#0D47A1',
     padding: 10,
     borderRadius: 30,
-    width: windowWidth * 0.4,  // Ajustado el ancho del botón
+    width: windowWidth * 1.9,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  bottomButton: {
+    backgroundColor: '#0D47A1',
+    padding: 10,
+    borderRadius: 30,
+    width: windowWidth * 0.6,
     justifyContent: 'center',
     alignItems: 'center',
   },
   buttonText: {
     color: 'white',
     textAlign: 'center',
-    fontSize: 14,  // Ajustado el tamaño del texto
-  },
-  text: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    color: 'white',
+    fontSize: 14,
   },
   botonqr: {
     backgroundColor: '#3D6697',
-  }
+  },
 });
