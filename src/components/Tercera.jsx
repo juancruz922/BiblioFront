@@ -73,7 +73,8 @@ const PrestamosScreen = () => {
           <View style={styles.prestamoItem}>
             <Text>{`Libro: ${item.titulo}`}</Text>
             <Text>{`Nota: ${item.nota || 'N/A'}`}</Text>
-            <Text>{`Usuario: ${item.idUsuario}`}</Text>
+            <Text>{`IdUsuario: ${item.usuarioId}`}</Text>
+            <Text>{`Nombre Usuario: ${item.usuarioNombre}`}</Text>
             <Text>{`Fecha de Inicio: ${item.fechaInicio}`}</Text>
             <Text>{`Fecha de Fin: ${item.fechaFin || 'No cerrado'}`}</Text>
             {renderFinPrestamoButton(item)}

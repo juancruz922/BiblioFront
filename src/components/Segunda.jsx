@@ -42,6 +42,7 @@ const SecondScreen = ({ route }) => {
         ...libroCoincide,
         nota: note,
         usuarioId: usuario.idUsuario,
+        usuarioNombre: usuario.nombre,
         fechaInicio: formatDate(fechaInicio), // Guarda la fecha y hora en formato ISO
       });
   
