@@ -42,17 +42,30 @@ const SecondScreen = ({ route }) => {
         ...libroCoincide,
         nota: note,
         usuarioId: usuario.id,
-        fechaInicio: fechaInicio.toISOString(), // Guarda la fecha y hora en formato ISO
+        fechaInicio: formatDate(fechaInicio), // Guarda la fecha y hora en formato ISO
       });
   
       setIsModalVisible(true);
     } else {
       alert('Seleccione un libro de la lista');
     }
+
+    
     console.log('Préstamos después de abrir el modal: ', prestamos.prestamo);
   };
   
-
+  const formatDate = (date) => {
+    const options = {
+      year: '2-digit',
+      month: '2-digit',
+      day: '2-digit',
+      hour: 'numeric',
+      minute: 'numeric',
+      second: 'numeric',
+      hour12: true,
+    };
+    return new Intl.DateTimeFormat('es-ES', options).format(date);
+};
   const closeModal = () => {
     const fechaFin = new Date(); // Obtiene la fecha y hora actual al cerrar el préstamo
   
@@ -64,13 +77,12 @@ const SecondScreen = ({ route }) => {
     );
   
     if (prestamoActual) {
-      prestamoActual.fechaFin = fechaFin.toISOString(); // Guarda la fecha y hora en formato ISO
+      prestamoActual.fechaFin = 'Corriendo';
     }
   
     setSelectedBook('');
     setSearchText('');
     console.log('Préstamos después de cerrar el modal: ', prestamos.prestamo);
-    setRefresh(!refresh);
   };
 
   return (
