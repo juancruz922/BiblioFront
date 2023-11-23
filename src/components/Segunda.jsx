@@ -43,9 +43,10 @@ const SecondScreen = ({ route }) => {
     console.log(`Seleccionaste: ${book.Titulo}`);
   };
 
-  const openModal = () => {
-    const libroCoincide = libros.find(
-      (libro) => libro.Titulo.trim().toLowerCase() === selectedBook.trim().toLowerCase()
+  const openModal = async () => {
+    const librosData = await getLibros();
+    const libroCoincide = librosData.find(
+      (librosData) => librosData.Titulo.trim().toLowerCase() === selectedBook.trim().toLowerCase()
     );
     
     if (libroCoincide) {
