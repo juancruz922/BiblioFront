@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
 import { Ionicons } from '@expo/vector-icons'; // Importar el ícono para la contraseña
 import usuarios from '../data/usuarios'; // Importar los datos de usuarios
+import { getLibros } from "../api/apiFunction.js"
 
 const LoginScreen = ({ setEstadoUsuario, setUsuario }) => {
   const [nombreUsuario, setNombreUsuario] = useState('');

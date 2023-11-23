@@ -4,7 +4,7 @@ import QRCode from 'react-native-qrcode-svg';
 import Main from './Main.jsx';
 import usuarios from '../data/usuarios';
 import prestamos from '../data/prestamos';
-import libros from '../data/libros';
+import {getLibros} from '../api/apiFunction';
 
 const SecondScreen = ({ route }) => {
   const [searchText, setSearchText] = useState('');
@@ -13,31 +13,42 @@ const SecondScreen = ({ route }) => {
   const [selectedBook, setSelectedBook] = useState(null);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [qrData, setQRData] = useState('');
+  const [libros, setLibros] = useState(getLibros());
   const { usuario } = route.params;
 
+
+ 
   const handleSearch = (text) => {
     setSearchText(text);
     setSelectedBook(text);
-    const filtered = libros.filter(book => book.titulo.toLowerCase().includes(text.toLowerCase()));
+  
+
+   // Filtrar los libros basándose en el texto de búsqueda actual
+   const filtered = libros.filter((el) =>
+   el.Titulo.toLowerCase().includes(text.toLowerCase())
+  );
+  
+    console.log('filtered', filtered);
+    console.log('hola', libros);
     setFilteredBooks(filtered);
   };
 
   const handleBookSelect = (book) => {
-    setSelectedBook(book.titulo);
-    setSearchText(book.titulo);
+    setSelectedBook(book.Titulo);
+    setSearchText(book.Titulo);
     setFilteredBooks([]);
-    console.log(`Seleccionaste: ${book.titulo}`);
+    console.log(`Seleccionaste: ${book.Titulo}`);
   };
 
   const openModal = () => {
     const libroCoincide = libros.find(
-      (libro) => libro.titulo.toLowerCase() === selectedBook.toLowerCase()
+      (libro) => libro.Titulo.trim().toLowerCase() === selectedBook.trim().toLowerCase()
     );
-  
+    
     if (libroCoincide) {
       const fechaInicio = new Date(); // Obtiene la fecha y hora actual
   
-      setQRData(`Libro: ${libroCoincide.titulo} / Nota: ${note} / Usuario: ${usuario.nombre}`);
+      setQRData(`Libro: ${libroCoincide.Titulo} / Nota: ${note} / Usuario: ${usuario.nombre}`);
       prestamos.prestamo.push({
         ...libroCoincide,
         nota: note,
@@ -74,7 +85,7 @@ const SecondScreen = ({ route }) => {
   
     // Encuentra el préstamo correspondiente y establece la fechaFin
     const prestamoActual = prestamos.prestamo.find(
-      (prestamo) => prestamo.titulo.toLowerCase() === selectedBook.toLowerCase()
+      (prestamo) => prestamo.Titulo.toLowerCase() === selectedBook.toLowerCase()
     );
   
     if (prestamoActual) {
@@ -103,16 +114,16 @@ const SecondScreen = ({ route }) => {
             />
             {filteredBooks.length > 0 && (
              <FlatList
-             data={filteredBooks}
+             data={libros}
              renderItem={({ item }) => (
                <TouchableOpacity
                  style={[
                    styles.searchResultItem,
-                   selectedBook === item.titulo && styles.selectedItem,
+                   selectedBook === item.Titulo && styles.selectedItem,
                  ]}
                  onPress={() => handleBookSelect(item)}
                >
-                 <Text>{item.titulo}</Text>
+                 <Text>{item.Titulo}</Text>
                </TouchableOpacity>
              )}
              keyExtractor={(item) => item.idLibro.toString()}
