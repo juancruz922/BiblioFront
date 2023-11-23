@@ -17,21 +17,24 @@ const SecondScreen = ({ route }) => {
   const { usuario } = route.params;
 
 
- 
-  const handleSearch = (text) => {
-    setSearchText(text);
-    setSelectedBook(text);
-  
 
-   // Filtrar los libros basándose en el texto de búsqueda actual
-   const filtered = libros.filter((el) =>
-   el.Titulo.toLowerCase().includes(text.toLowerCase())
-  );
+  const handleSearch = async (text) => {
+    try {
+      // Espera a que se resuelva la promesa antes de continuar
+      const librosData = await getLibros();
   
-    console.log('filtered', filtered);
-    console.log('hola', libros);
-    setFilteredBooks(filtered);
+      setSearchText(text);
+      setSelectedBook(text);
+  
+      // Filtra los libros basándose en el texto de búsqueda actual
+      const filtered = librosData.filter((el) => el.Titulo.toLowerCase().includes(text.toLowerCase()));
+      console.log('filtered', filtered);
+      setFilteredBooks(filtered);
+    } catch (error) {
+      console.error('Error al obtener libros:', error);
+    }
   };
+  
 
   const handleBookSelect = (book) => {
     setSelectedBook(book.Titulo);
@@ -114,7 +117,7 @@ const SecondScreen = ({ route }) => {
             />
             {filteredBooks.length > 0 && (
              <FlatList
-             data={libros}
+             data={filteredBooks}
              renderItem={({ item }) => (
                <TouchableOpacity
                  style={[
@@ -126,7 +129,7 @@ const SecondScreen = ({ route }) => {
                  <Text>{item.Titulo}</Text>
                </TouchableOpacity>
              )}
-             keyExtractor={(item) => item.idLibro.toString()}
+             keyExtractor={(item) => item.IdLibro.toString()}
            />
             )}
           </View>
