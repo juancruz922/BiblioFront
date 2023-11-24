@@ -7,10 +7,10 @@ import prestamos from '../data/prestamos';
 import {getLibros} from '../api/apiFunction';
 
 const SecondScreen = ({ route }) => {
-  const [searchText, setSearchText] = useState('');
+ const [searchText, setSearchText] = useState('');
   const [note, setNote] = useState('');
   const [filteredBooks, setFilteredBooks] = useState([]);
-  const [selectedBook, setSelectedBook] = useState(null);
+ const [selectedBook, setSelectedBook] = useState(null);
   const [isModalVisible, setIsModalVisible] = useState(false);
 
   const [qrData, setQRData] = useState('');
@@ -38,11 +38,12 @@ const SecondScreen = ({ route }) => {
   
 
   const handleBookSelect = (book) => {
-    setSelectedBook(book.Titulo);
-    setSearchText(book.Titulo);
-    setFilteredBooks([]);
-    console.log(`Seleccionaste: ${book.Titulo}`);
-  };
+  setSelectedBook(book.Titulo);
+  setSearchText(book.Titulo);
+  setFilteredBooks([]);
+  console.log(`Seleccionaste: ${book.Titulo}`);
+};
+
 
   const openModal = async () => {
     const librosData = await getLibros();
@@ -111,13 +112,14 @@ const SecondScreen = ({ route }) => {
         </View>
         <View style={styles.grayRectangle}>
           <View style={styles.inputContainer}>
-            <TextInput
-              style={styles.input}
-              placeholder="Seleccione un libro"
-              onFocus={()=>setFilteredBooks(libros)}
-              onChangeText={handleSearch}
-              value={searchText}
-            />
+           <TextInput
+  style={styles.input}
+  placeholder="Seleccione un libro"
+  onFocus={() => setFilteredBooks(libros)}
+  onChangeText={handleSearch}
+  value={searchText}
+/>
+
             {filteredBooks.length > 0 && (
              <FlatList
              data={filteredBooks}
