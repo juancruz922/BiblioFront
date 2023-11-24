@@ -12,6 +12,7 @@ const SecondScreen = ({ route }) => {
   const [filteredBooks, setFilteredBooks] = useState([]);
   const [selectedBook, setSelectedBook] = useState(null);
   const [isModalVisible, setIsModalVisible] = useState(false);
+
   const [qrData, setQRData] = useState('');
   const [libros, setLibros] = useState(getLibros());
   const { usuario } = route.params;
@@ -55,6 +56,7 @@ const SecondScreen = ({ route }) => {
       setQRData(`Libro: ${libroCoincide.Titulo} / Nota: ${note} / Usuario: ${usuario.nombre}`);
       prestamos.prestamo.push({
         ...libroCoincide,
+        titulo: libroCoincide.Titulo,
         nota: note,
         usuarioId: usuario.idUsuario,
         usuarioNombre: usuario.nombre,
